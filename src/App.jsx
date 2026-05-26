@@ -777,7 +777,9 @@ export default function App() {
                     My personal tank
                   </p>
                   <p className="mt-1 text-sm text-slate-300">
-                    A low-tech planted setup I use to grow and test most of the plants in the shop.
+                    My 36 Gallon planted community tank. I am running CO2 and also using a high-tech light.
+                    For a filter I am using a Fluval 207.
+                    The tank features Neon Tetras, Ember Tetras, Albino Corydoras, Guppies, several types of snails, and some Amano Shrimp.
                   </p>
                 </div>
 
@@ -788,17 +790,20 @@ export default function App() {
                   About Small Fry
                 </p>
                 <h2 className="mt-4 text-4xl font-black leading-tight md:text-5xl">
-                  Hey guys, <span className="text-sky-300">Small Fry</span> here!
+                  <span className="text-sky-300">Small Fry</span> here!
                 </h2>
 
                 <div className="mt-6 h-1 w-20 rounded-full bg-sky-300" />
                 <p className="mt-7 text-lg leading-8 text-slate-300">
-                  I’m a planted tank hobbyist offering healthy aquarium plants,
-                  fair pricing, and a clean buying experience.
+                  I’m a planted tank hobbyist focused on growing healthy aquarium plants, offering fair pricing, and creating an
+                  exceptional buying experience.
                 </p>
                 <p className="mt-4 text-lg leading-8 text-slate-300">
-                  This shop features aquatic plants, floaters, stem plants, and a
-                  behind-the-scenes baby shrimp showcase.
+                  I currently manage four tanks out of my bedroom: two 10-gallon setups, a 20-gallon, and a high-tech 36-gallon.
+                  These tanks are where I grow, test, and maintain the plants featured on the site.
+                  This shop is centered around aquatic plants, including floaters and stem plants, with plans to offer
+                  them for sale in the future. Alongside that, I’ve built a shrimp showcase featuring
+                  my baby blue bolt shrimp, giving a further look into my personal setups.
                 </p>
               </div>
             </div>
@@ -1099,34 +1104,49 @@ export default function App() {
 
           <section id="faq" className="mx-auto grid max-w-7xl gap-8 px-4 py-16 md:grid-cols-2">
             <div className="rounded-[1.75rem] border border-slate-200 bg-white p-8 shadow-sm">
-              <p className="text-sm font-black uppercase tracking-[0.25em] text-sky-700">
+              <p className="text-3xl font-black uppercase tracking-[0.25em] text-sky-700">
                 About
               </p>
               <h2 className="mt-2 text-3xl font-black">
                 Fresh plants from a real hobbyist tank.
               </h2>
               <p className="mt-4 leading-8 text-slate-600">
-                Use this space for your story, how you grow plants, and what
-                buyers should expect.
+                I’ve been keeping planted aquariums as a hobby for a while, and this shop is built around that
+                experience. All of my plants are grown and maintained in my own tanks, where I focus on stable
+                parameters, healthy growth, and clean layouts.
+                I currently run multiple setups, including two 10-gallon tanks, a 20-gallon, and a high-tech 36-gallon
+                where I grow, test, and propagate the plants you see here. This lets me observe how each plant behaves
+                before offering it and helps ensure they arrive in good condition.
+                When you order, you can expect hobbyist-grown plants that have been cared for personally, packaged with
+                attention, and shipped with the goal of getting them to you healthy and ready to thrive in your own tank.
               </p>
             </div>
 
             <div className="rounded-[1.75rem] border border-slate-200 bg-white p-8 shadow-sm">
-              <p className="text-sm font-black uppercase tracking-[0.25em] text-sky-700">
+              <p className="text-3xl font-black uppercase tracking-[0.25em] text-sky-700">
                 FAQ
               </p>
               <div className="mt-5 space-y-3">
                 {[
-                  "When do orders ship?",
-                  "Do you guarantee live arrival?",
-                  "Are plants snail-free?",
-                ].map((question) => (
-                    <details key={question} className="rounded-2xl bg-slate-50 p-4">
+                  {
+                    question: "When do orders ship?",
+                    answer: "Orders ship on Mondays and Tuesdays."
+                  },
+                  {
+                    question: "Do you guarantee live arrival?",
+                    answer: "Yes, we offer a live arrival guarantee under standard shipping conditions."
+                  },
+                  {
+                    question: "Are plants snail-free?",
+                    answer: "We do our best to keep plants snail-free, but occasional hitchhikers may occur."
+                  },
+                ].map((item) => (
+                    <details key={item.question} className="rounded-2xl bg-slate-50 p-4">
                       <summary className="cursor-pointer font-black">
-                        {question}
+                        {item.question}
                       </summary>
                       <p className="mt-2 text-sm text-slate-600">
-                        Add your exact policy here.
+                        {item.answer}
                       </p>
                     </details>
                 ))}
