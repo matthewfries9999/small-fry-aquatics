@@ -1,16 +1,74 @@
-# React + Vite
+# Small Fry Aquatics
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Small Fry Aquatics is a simulated freshwater aquarium e-commerce storefront focused on shrimp, fish, and aquatic plants.
 
-Currently, two official plugins are available:
+This project was built to replicate a real online shopping experience for aquarium hobbyists, with an emphasis on clean UI, intuitive navigation, and practical information such as livestock care, tank requirements, and shipping expectations.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Live Demo
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+https://small-fry-aquatics.vercel.app/
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Features
+
+- Product browsing for plants with filters to browse by category
+- Personal tank showcase section  
+- Detailed plant care information (temperature, CO₂, difficulty, etc.)  
+- FAQ section for common aquarium questions  
+- Clean, modern UI design  
+- Responsive layout on mobile and desktop devices
+
+---
+
+## Tech Stack
+
+- React  
+- JavaScript (ES6+)  
+- CSS / Tailwind 
+- Framer Motion  
+- Vercel for deployment
+  
+---
+
+## Why I Built This
+
+I wanted to create a project that felt like a real product rather than a basic tutorial app. As someone interested in aquatics, I combined domain knowledge with frontend development to build a niche storefront that reflects an actual hobbyist experience.
+
+This project focuses on clear UI/UX, structured information, and simulating a real-world e-commerce layout.
+
+---
+
+## Current Improvements
+
+- Refactoring large components into a modular structure  
+- Adding a developer/about section  
+- Improving carousel interactions and animations  
+
+---
+
+## Project Structure (In Progress)
+
+The project is currently being refactored from a single large file into reusable components such as:
+
+- Navbar  
+- ProductCard  
+- TankShowcase  
+- Footer  
+
+---
+
+## Future Goals
+
+- Add cart functionality  
+- Backend integration (inventory and database)  
+- User accounts  
+- Search and filtering system  
+
+---
+
+## Author
+
+Matthew Fries
