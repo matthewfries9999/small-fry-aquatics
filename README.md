@@ -41,7 +41,7 @@ This project focuses on clear UI/UX, structured information, and simulating a re
 
 ---
 
-## Current Improvements
+## Current Improvements in Progress
 
 - Refactoring large components into a modular structure  
 - Adding a developer/about section  
@@ -62,10 +62,8 @@ The project is currently being refactored from a single large file into reusable
 
 ## Future Goals
 
-- Add cart functionality  
 - Backend integration (inventory and database)  
 - User accounts  
-- Search and filtering system  
 
 ---
 
