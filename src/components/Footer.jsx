@@ -27,11 +27,12 @@ export default function Footer() {
                         what Small Fry should stock next.
                     </p>
 
-                    href="mailto:support@smallfryaquatics.com"
-                    className="mt-4 inline-flex rounded-full border border-sky-300/40 bg-sky-300/10 px-5 py-3 text-sm font-black text-sky-100 hover:bg-sky-300/20"
-                    <a>
-                    support@smallfryaquatics.com
-                </a>
+                    <a
+                        href="mailto:support@smallfryaquatics.com"
+                        className="mt-4 inline-flex rounded-full border border-sky-300/40 bg-sky-300/10 px-5 py-3 text-sm font-black text-sky-100 hover:bg-sky-300/20"
+                    >
+                        support@smallfryaquatics.com
+                    </a>
             </div>
 
             <div className="flex flex-col gap-3 text-sm font-bold text-sky-100/80 lg:items-end">

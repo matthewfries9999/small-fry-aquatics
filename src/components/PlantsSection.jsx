@@ -6,6 +6,8 @@ const difficulties = ["All", "Beginner friendly", "Intermediate"];
 const co2Options = ["All", "Not required", "Optional", "Recommended"];
 const placementOptions = ["All", "Foreground", "Midground", "Background", "Floating"];
 
+
+
 function ProductImage({ product }) {
     const [failed, setFailed] = useState(false);
 
