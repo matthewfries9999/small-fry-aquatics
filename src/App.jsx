@@ -6,236 +6,14 @@ import PlantsSection from "./components/PlantsSection.jsx";
 import ShippingSection from "./components/Shipping.jsx";
 import HeroSection from "./components/HeroSection.jsx";
 import BabyShrimp from "./components/BabyShrimp.jsx";
-import {X, Truck, ShieldCheck, Leaf, Tag,} from "lucide-react";
-import thirtySixGallon from './assets/thirtySixGallon.jpg'
-import blueShrimp from './assets/blueShrimp.png'
-import tenGallon1 from './assets/tenGallon1.png'
-import tenGallon2 from './assets/tenGallon2.png'
-import shrimpVideo from './assets/shrimpVideo.mp4'
-import tankVideo from './assets/tankVideo.mp4'
+import PlantDetailsModal from "./components/PlantDetailsModal";
+import CartSummary from "./components/CartSummary";
+import {Truck, ShieldCheck, Leaf, Tag,} from "lucide-react";
 import products from "./data/Products.js";
-import { formatCurrency, getPlantCare } from "./utils/helpers";
-
-function PlantDetailsModal({product, onClose, onAddToCart}) {
-    if (!product) return null;
-
-    const care = getPlantCare(product);
-
-    return (
-        <div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-[#061722]/80 px-4 py-6 backdrop-blur-sm"
-            onClick={onClose}
-        >
-            <motion.div
-                initial={{opacity: 0, y: 20, scale: 0.98}}
-                animate={{opacity: 1, y: 0, scale: 1}}
-                className="relative max-h-[90vh] w-full max-w-5xl overflow-y-auto rounded-[2rem] bg-white shadow-2xl"
-                onClick={(event) => event.stopPropagation()}
-            >
-                <button
-                    onClick={onClose}
-                    className="absolute right-4 top-4 z-20 rounded-full bg-white p-3 shadow"
-                >
-                    <X size={20}/>
-                </button>
-
-                <div className="grid lg:grid-cols-[0.95fr_1.05fr]">
-                    <div className="relative h-80 bg-slate-100 lg:h-auto">
-                        <img
-                            src={product.image}
-                            alt={product.name}
-                            className="h-full w-full object-cover"
-                            />
-                    </div>
-
-                    <div className="p-8 md:p-10">
-                        <p className="text-sm font-black uppercase tracking-[0.25em] text-sky-700">
-                            Plant details
-                        </p>
-                        <h3 className="mt-3 text-4xl font-black">{product.name}</h3>
-                        <p className="mt-5 leading-8 text-slate-700">
-                            {product.description}
-                        </p>
-
-                        <div className="mt-7 grid gap-3 sm:grid-cols-2">
-                            {[
-                                ["Light", care.light],
-                                ["CO2", care.co2],
-                                ["Temperature", care.temperature],
-                                ["Difficulty", care.difficulty],
-                            ].map(([label, value]) => (
-                                <div
-                                    key={label}
-                                    className="rounded-2xl border border-slate-200 bg-slate-50 p-4"
-                                >
-                                    <p className="text-xs font-black uppercase text-slate-500">
-                                        {label}
-                                    </p>
-                                    <p className="mt-1 text-lg font-black">{value}</p>
-                                </div>
-                            ))}
-                        </div>
-
-                        <div className="mt-8 flex items-center justify-between gap-4">
-              <span className="text-3xl font-black">
-                {formatCurrency(product.price)}
-              </span>
-                            <button
-                                onClick={() => onAddToCart(product)}
-                                className="rounded-full bg-[#071824] px-7 py-4 text-sm font-black uppercase text-white hover:bg-sky-700"
-                            >
-                                Add to cart
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </motion.div>
-        </div>
-    );
-}
-
-function CartSummary({
-                         cart,
-                         onClose,
-                         onRemove,
-                         zip,
-                         setZip,
-                         calculateRates,
-                         taxRate,
-                         shipping,
-                         zipError,
-                         cartTotal
-
-                     }) {
-    const grouped = cart.reduce((acc, item) => {
-        acc[item.name] = acc[item.name] || {...item, qty: 0};
-        acc[item.name].qty += 1;
-        return acc;
-    }, {});
-
-    const items = Object.values(grouped);
-
-    const total = items.reduce((sum, item) => sum + item.price * item.qty, 0);
-
-
-    return (
-        <div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4"
-            onClick={onClose}
-        >
-            <div
-                className="w-full max-w-3xl rounded-2xl bg-white shadow-xl flex flex-col max-h-[90vh] overflow-hidden"
-                onClick={(e) => e.stopPropagation()}
-            >
-
-                {/* HEADER */}
-                <div className="flex items-center justify-between p-6 border-b">
-                    <h2 className="text-2xl font-black">Your Cart</h2>
-                    <button onClick={onClose}>✕</button>
-                </div>
-
-                {/* SCROLLABLE CART AREA */}
-                <div className="flex-1 overflow-y-auto px-6 py-4 space-y-4">
-                    {items.length === 0 ? (
-                        <p className="text-slate-500">Your cart is empty.</p>
-                    ) : (
-                        items.map((item) => (
-                            <div
-                                key={item.name}
-                                className="flex items-center justify-between border-b pb-3"
-                            >
-                                <div>
-                                    <p className="font-black">{item.name}</p>
-                                    <p className="text-sm text-slate-500">
-                                        {item.qty} × ${item.price.toFixed(2)}
-                                    </p>
-                                </div>
-
-                                <div className="flex items-center gap-3">
-                                    <p className="font-black">
-                                        ${(item.qty * item.price).toFixed(2)}
-                                    </p>
-                                    <button
-                                        onClick={() => onRemove(item.name)}
-                                        className="text-red-500 text-sm"
-                                    >
-                                        Remove
-                                    </button>
-                                </div>
-                            </div>
-                        ))
-                    )}
-                </div>
-
-                {/* FOOTER (ALWAYS VISIBLE) */}
-                <div className="border-t p-6 space-y-4 bg-white">
-
-                    {/* ZIP */}
-                    <div>
-                        <label className="text-sm font-bold">ZIP Code</label>
-                        <div className="mt-2 flex gap-2">
-                            <input
-                                value={zip}
-                                onChange={(e) => {
-                                    const val = e.target.value;
-                                    if (val === "" || /^\d{0,5}$/.test(val)) {
-                                        setZip(val);
-                                    }
-                                }}
-                                placeholder="Enter ZIP"
-                                className="w-full rounded-lg border px-3 py-2"
-                            />
-                            <button
-                                onClick={() => calculateRates(zip, cartTotal)}
-                                className="rounded-lg bg-sky-600 px-4 py-2 text-white font-bold"
-                            >
-                                Calculate
-                            </button>
-                        </div>
-
-                        {zipError && (
-                            <p className="mt-2 text-sm font-bold text-red-500">
-                                {zipError}
-                            </p>
-                        )}
-                    </div>
-
-                    {/* TOTALS */}
-                    <div className="space-y-2">
-                        <div className="flex justify-between text-sm">
-                            <span>Subtotal</span>
-                            <span>${total.toFixed(2)}</span>
-                        </div>
-
-                        <div className="flex justify-between text-sm">
-                            <span>Tax</span>
-                            <span>${(total * taxRate).toFixed(2)}</span>
-                        </div>
-
-                        <div className="flex justify-between text-sm">
-                            <span>Shipping</span>
-                            <span>${shipping.toFixed(2)}</span>
-                        </div>
-
-                        <div className="flex justify-between text-lg font-black">
-                            <span>Total</span>
-                            <span>${(total + total * taxRate + shipping).toFixed(2)}</span>
-                        </div>
-                    </div>
-
-                    {/* CHECKOUT BUTTON */}
-                    <button className="w-full rounded-xl bg-sky-600 py-3 font-black text-white">
-                        Checkout
-                    </button>
-
-                </div>
-            </div>
-        </div>
-    );
-}
+import { showcaseItems, shrimpShowcase} from "./data/showcaseData";
+import { formatCurrency, getPlantCare,buildRates } from "./utils/Helpers.js";
 
 export default function App() {
-
     const [cart, setCart] = useState([]);
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [cartOpen, setCartOpen] = useState(false);
@@ -244,52 +22,7 @@ export default function App() {
     const [shipping, setShipping] = useState(0);
     const [zipError, setZipError] = useState("");
 
-    const showcaseItems = [
-        {
-            src: thirtySixGallon,
-            type: "image",
-            title: "My 36 gallon community tank",
-            description:
-                "I am running CO2 and also using a high-tech light. " +
-                "For a filter I am using a Fluval 207. The tank features Neon Tetras, Ember Tetras, Albino Corydoras," +
-                " Guppies, several types of snails, and some Amano Shrimp.",
-        },
-        {
-            src: tenGallon1,
-            type: "image",
-            title: "My 10 gallon snail tank",
-            description:
-                "My first tank! I use it now mainly to breed Bladder and Pond snails. There is also a dwarf sag carpet growing steadily.",
-        },
-        {
-            src: tenGallon2,
-            type: "image",
-            title: "My 10 gallon caridina tank",
-            description:
-                "This tank houses my caridina shrimp. There are both Blue Bolt and Orange Sun caridina in the tank. I am excited to see" +
-                " what their offspring looks like a few generations down the line! ",
-        },
-        {
-            src: tankVideo,
-            type: "video",
-            title: "A video of my community tank",
-            description:
-                "My 36 gallon tank featured in the first image.",
-        },
-    ];
-
     const [currentIndex, setCurrentIndex] = useState(0);
-
-    const shrimpShowcase = [
-        {
-            src: blueShrimp,
-            type: "image",
-        },
-        {
-            src: shrimpVideo,
-            type: "video",
-        },
-    ];
 
     const nextImage = () => {
         setCurrentIndex((prev) => (prev + 1) % showcaseItems.length);
@@ -301,45 +34,13 @@ export default function App() {
         );
     };
 
-    function isValidContiguousUSZip(zip) {
-        if (!/^\d{5}$/.test(zip)) return false;
-
-        const zipNum = parseInt(zip, 10);
-
-        // Alaska + Hawaii exclusion
-        const isExcluded =
-            (zipNum >= 96700 && zipNum <= 96899) || // Hawaii
-            (zipNum >= 99500 && zipNum <= 99999);   // Alaska
-
-        // basic continental US range check
-        const isContiguous = zipNum >= 1001 && zipNum <= 99950;
-
-        return isContiguous && !isExcluded;
-    }
-
     function calculateRates(zipCode, total) {
-        const cleanZip = zipCode.trim();
-
-        if (!isValidContiguousUSZip(cleanZip)) {
-            setZipError("Enter a valid 5-digit continental US ZIP code");
-            return;
+        const { taxRate, shipping, error } = buildRates(zipCode, total);
+        setZipError(error ?? "");
+        if (!error) {
+            setTaxRate(taxRate);
+            setShipping(shipping);
         }
-
-        setZipError("");
-
-        const inState = cleanZip.startsWith("60") || cleanZip.startsWith("61");
-        const tax = inState ? 0.1025 : 0.0;
-
-        let ship = 9.99;
-
-        if (total >= 100) {
-            ship = 0;
-        } else if (total >= 50) {
-            ship = 6.99;
-        }
-
-        setTaxRate(tax);
-        setShipping(ship);
     }
 
     function removeFromCart(name) {
@@ -478,7 +179,6 @@ export default function App() {
                     </div>
                 </section>
 
-
                 <PlantsSection
                     products={products}
                     setCart={setCart}
@@ -561,18 +261,16 @@ export default function App() {
                         calculateRates={calculateRates}
                         taxRate={taxRate}
                         shipping={shipping}
-                        cartTotal={cartTotal}
                         zipError={zipError}
+                        cartTotal={cartTotal}
                     />
                 )}
             </main>
-
             <PlantDetailsModal
                 product={selectedProduct}
                 onClose={() => setSelectedProduct(null)}
                 onAddToCart={(product) => setCart((items) => [...items, product])}
             />
-
             <Footer/>
         </div>
     );
