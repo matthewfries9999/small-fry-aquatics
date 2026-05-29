@@ -103,7 +103,8 @@ function CartSummary({
                          calculateRates,
                          taxRate,
                          shipping,
-                         zipError
+                         zipError,
+                         cartTotal
 
                      }) {
     const grouped = cart.reduce((acc, item) => {
@@ -185,7 +186,7 @@ function CartSummary({
                                 className="w-full rounded-lg border px-3 py-2"
                             />
                             <button
-                                onClick={() => calculateRates(zip)}
+                                onClick={() => calculateRates(zip, cartTotal)}
                                 className="rounded-lg bg-sky-600 px-4 py-2 text-white font-bold"
                             >
                                 Calculate
@@ -316,7 +317,7 @@ export default function App() {
         return isContiguous && !isExcluded;
     }
 
-    function calculateRates(zipCode) {
+    function calculateRates(zipCode, total) {
         const cleanZip = zipCode.trim();
 
         if (!isValidContiguousUSZip(cleanZip)) {
@@ -331,9 +332,9 @@ export default function App() {
 
         let ship = 9.99;
 
-        if (cartTotal >= 100) {
+        if (total >= 100) {
             ship = 0;
-        } else if (cartTotal >= 50) {
+        } else if (total >= 50) {
             ship = 6.99;
         }
 
@@ -356,8 +357,7 @@ export default function App() {
 
     return (
         <div className="min-h-screen bg-white text-slate-950">
-            <Header cart={cart} setCartOpen={setCartOpen} />
-
+            <Header cart={cart} onCartOpen={() => setCartOpen(true)} />
 
             <main>
                 <HeroSection/>
